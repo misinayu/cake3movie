@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE users(
 	id int(11) NOT NULL AUTO_INCREMENT,
 	email varchar(255) NOT NULL,
+	nickname varchar(255) NOT NULL,
 	password varchar(255) NOT NULL,
 	modified datetime DEFAULT NULL,
 	created datetime DEFAULT NULL,
@@ -34,7 +35,6 @@ CREATE TABLE playlist_movies(
 	modified datetime DEFAULT NULL,
 	created datetime DEFAULT NULL,
 	PRIMARY KEY (id)
---	UNIQUE KEY (movie_id, playlist_id)
 );
 
 

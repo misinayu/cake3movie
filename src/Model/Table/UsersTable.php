@@ -28,6 +28,9 @@ class UsersTable extends Table{
 					'provider' => 'table',
 					'message' => '登録できません']);
 		$validator
+			->requirePresence('nickname', 'create')
+			->notEmpty('nickname');
+		$validator
 			->requirePresence('password', 'create')
 			->notEmpty('password');
 		
