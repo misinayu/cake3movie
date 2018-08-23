@@ -25,6 +25,7 @@ $this->prepend('script', $this->Html->script([
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
+    <?= $this->fetch('script') ?>
     <?= $this->fetch('css') ?>
     
 </head>
@@ -32,6 +33,5 @@ $this->prepend('script', $this->Html->script([
     
     <?= $this->element("menu/" . $menu) ?>
     <?= $this->element('content') ?>
-    <?= $this->fetch('script') ?>
 </body>
 </html>

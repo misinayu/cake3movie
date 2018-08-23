@@ -12,7 +12,7 @@
  * @since     0.2.9
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
@@ -54,7 +54,7 @@ class AppController extends Controller
         //$this->loadComponent('Csrf');
     }
 
-    public function beforeFilter($event){
+    public function beforeFilter(Event $event){
     	parent::beforeFilter($event);
     	// 認証している場合は、メニューを「admin」用にする
     	$user = $this->MyAuth->user();

@@ -20,7 +20,7 @@
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<p class="navbar-text">ようこそ、<?= $auth["email"]; ?></p>
+				<p class="navbar-text">ようこそ、<?= $auth["nickname"]; ?></p>
 				<li class="dropdown">
 					<?= $this->Html->link("管理", "#", ["data-toggle" => "dropdown"]); ?>
 					<ul class="dropdown-menu">

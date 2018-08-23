@@ -29,7 +29,7 @@ class MyAuthComponent extends AuthComponent{
 				],
 				"logoutRedirect" => [
 						"controller" => "Users",
-						"action" => "index",
+						"action" => "login",
 						"prefix" => false
 				],
 				"loginAction" => [
