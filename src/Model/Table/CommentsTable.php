@@ -24,9 +24,18 @@ class CommentsTable extends Table{
 			->requirePresence('body', 'create')
 			->notEmpty('body');
 		$validator
+			->integer('user_id')
+			->requirePresence('user_id')
+			->notEmpty('user_id');
+		$validator
 			->requirePresence('movie_id', 'create')
 			->notEmpty('movie_id');
 		
 		return $validator;
+	}
+	
+	public function buildRules(RulesChecker $rules){
+		$rules->add($rules->existsIn(['user_id'], 'Users'));
+		return $rules;
 	}
 }

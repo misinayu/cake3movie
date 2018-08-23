@@ -42,6 +42,7 @@ DROP TABLE ID EXISTS comments;
 CREATE TABLE comments(
 	id int(11) NOT NULL AUTO_INCREMENT,
 	body varchar(255) NOT NULL,
+	user_id int(11) NOT NULL,
 	movie_id varchar(255) NOT NULL,
 	modified datetime DEFAULT NULL,
 	created datetime DEFAULT NULL,

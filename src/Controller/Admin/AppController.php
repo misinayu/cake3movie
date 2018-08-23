@@ -43,6 +43,8 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+        
+        $this->loadComponent('MyAuth');
 
         /*
          * Enable the following components for recommended CakePHP security settings.
@@ -52,27 +54,26 @@ class AppController extends Controller
         //$this->loadComponent('Csrf');
     }
 
-    /**
-     * Before render callback.
-     *
-     * @param \Cake\Event\Event $event The beforeRender event.
-     * @return \Cake\Network\Response|null|void
-     */
-    public function beforeRender(Event $event)
-    {
-    	$this->set("menu", "default"); //非ログインなのでメニューはデフォルト
-        if (!array_key_exists('_serialize', $this->viewVars) &&
-            in_array($this->response->type(), ['application/json', 'application/xml'])
-        ) {
-            $this->set('_serialize', true);
-        }
+    public function beforeFilter($event){
+    	parent::beforeFilter($event);
+    	// 認証している場合は、メニューを「admin」用にする
+    	$user = $this->MyAuth->user();
+    	$menu = "default";
+    	if($user){
+    		// Viewに認証済みユーザ情報を渡す
+    		$this->set("auth", $user);
+    		$menu = "admin";
+    	}
+    	$this->set("menu", $menu);
     }
     
     /**
      * 認証メソッド
      */
     public function isAuthorized($user = null){
-    	//ここでは常にfalseを返して認証させない
+    	if($user != null){
+    		return true;
+    	}
     	return false;
     }
 }
