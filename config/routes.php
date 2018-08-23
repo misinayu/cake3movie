@@ -75,6 +75,13 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->fallbacks(DashedRoute::class);
 });
 
+Router::prefix('admin', ['_namePrefix' => 'admin'], function($routes){
+	// /adminへのアクセスをHomesコントローラーへバインドする
+	$routes->connect("/", ["controller" => "Homes"]);
+	// それ以外のadminへアクセスは基本的な命名規則に従う
+	$routes->fallbacks(DashedRoute::class);
+});
+
 /**
  * Load all plugin routes.  See the Plugin documentation on
  * how to customize the loading of plugin routes.

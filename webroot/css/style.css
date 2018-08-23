@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+body{
+	padding-top: 50px;
+}
+
+.main{
+	padding: 20px 40px;
+	background-color: #fff;
+}
+
+.main .page-header{
+	margin-top: 0;
+}
