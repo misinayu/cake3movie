@@ -34,6 +34,7 @@ CREATE TABLE playlist_movies(
 	modified datetime DEFAULT NULL,
 	created datetime DEFAULT NULL,
 	PRIMARY KEY (id)
+--	UNIQUE KEY (movie_id, playlist_id)
 );
 
 
