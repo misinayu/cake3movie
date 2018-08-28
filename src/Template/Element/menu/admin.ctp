@@ -6,16 +6,11 @@
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li class="dropdown">
-					<?= $this->Html->link("マイプレイリスト", "#", ["data-toggle" => "dropdown"]); ?>
+					<?= $this->Html->link("プレイリスト", "#", ["data-toggle" => "dropdown"]); ?>
 					<ul class="dropdown-menu">
 						<li><?= $this->Html->link("プレイリスト一覧", "/admin/playlists/index"); ?></li>
 						<li><?= $this->Html->link("プレイリスト作成", "/admin/playlists/add"); ?></li>
-					</ul>
-				</li>
-				<li>
-					<?= $this->Html->link("公開プレイリスト", "#", ["data-toggle" => "dropdown"]); ?>
-					<ul class="dropdown-menu">
-						<li><?= $this->Html->link("公開プレイリスト一覧", "/admin/open_playlists/index"); ?></li>
+						<li><?= $this->Html->link("公開プレイリスト一覧", "/admin/playlists/open"); ?></li>
 					</ul>
 				</li>
 			</ul>
