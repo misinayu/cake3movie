@@ -10,15 +10,20 @@ class PlaylistsTable extends Table{
 	public function initialize(array $config){
 		parent::initialize($config);
 		
-		$this->table('products');
+		$this->table('playlists');
 		$this->displayField('name');
 		$this->primaryKey('id');
 		
 		$this->addBehavior('Timestamp');
 		
+		$this->belongsTo('Users', [
+				'foreignKey' => 'user_id',
+				'joinType' => 'INNER'
+		]);
 		$this->hasMany('PlaylistMovies', [
 				'foreignKey' => 'playlist_id'
 		]);
+		
 	}
 	
 	public function validationDefault(Validator $validator){
