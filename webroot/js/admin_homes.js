@@ -1,6 +1,7 @@
 var playlist = [];
 var current = 0;
 var player = null;
+var videoId = null;
 
 var apiKey = 'AIzaSyCKlMUEjUPMPayiDRADUpwDQW1AOBSOIms';
 var googleApiClientReady = function(){
@@ -18,25 +19,25 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 function onYouTubePlayerAPIReady(){}
 ////プレイヤが準備できたら呼び出させる
-//function onPlayerReady(event){
-//	event.target.playVideo();
-//}
+function onPlayerReady(event){
+	event.target.playVideo();
+}
 //// ステータスが変更されたら呼び出させる
-//function onPlayerStateChange(event){
-//	if(event.data == YT.PlayerState.ENDED){
-//		playNext();
-//	} else if(event.data == YT.PlayerState.PLAYING){
-////		$('#exe').removeClass('glyphicon-play');
-////		$('#exe').addClass('glyphicon-pause');
-//	} else if(event.data == YT.PlayerState.PAUSED){
-////		$('#exe').removeClass('glyphicon-play');
-////		$('#exe').addClass('glyphicon-play');
-//	}
-//}
+function onPlayerStateChange(event){
+	if(event.data == YT.PlayerState.ENDED){
+		playNext();
+	} else if(event.data == YT.PlayerState.PLAYING){
+//		$('#exe').removeClass('glyphicon-play');
+//		$('#exe').addClass('glyphicon-pause');
+	} else if(event.data == YT.PlayerState.PAUSED){
+//		$('#exe').removeClass('glyphicon-play');
+//		$('#exe').addClass('glyphicon-play');
+	}
+}
 //// エラーが起きたら次を再生
-//function onPlayerError(event){
-//	playNext();
-//}
+function onPlayerError(event){
+	playNext();
+}
 
 function playNext(){
 	current++;
@@ -119,6 +120,8 @@ var search = function(keyword){
 $(function(){
 	$('#main').hide();
 	$('#adminHomesSearchButton').on('click', adminHomesSearchRequest);
+	$('#addPlaylist').on('click', adminMovieAddRequest);
+	
 	$('#prev').on('click', function(){
 		playPrev();
 	});
@@ -140,8 +143,6 @@ function adminHomesSearchRequest(event){
 		success: adminHomeSearchSuccess,
 		error: adminHomeSearchError,
 	});
-	
-	$('#main').show();
 }
 
 function adminHomeSearchSuccess(result){
@@ -153,22 +154,42 @@ function adminHomeSearchError(result){
 	console.log(result);
 }
 
+function adminMovieAddRequest(event){
+	data = $('*[name=playlist_id]').val();
+	console.log(data);
+	$.ajax({
+		url: "/cake3movie/admin/movies/add",
+		type: "POST",
+		data: {playlist_id : data, video_id : videoId},
+		dataType: "json",
+		success: adminMovieAddSuccess,
+		error: adminMovieAddError,
+	});
+}
+function adminMovieAddSuccess(result){
+	console.log(result);
+}
+function adminMovieAddError(result){
+	console.log(result);
+}
+
 // 検索リストの動画を押した時
 function playMovie(event){
-	console.log('from playMovie');
-	location.href='http://localhost/cake3movie/admin/movies/index?movie_id='+ event.id;
-//	if(player === null){
-//		player = new YT.Player('player', {
-//			height: '315',
-//			width: '500',
-//			videoId: event.id,
-//			events: {
-//				'onReady': onPlayerReady,
-//				'onStateChange': onPlayerStateChange,
-//				'onError': onPlayerError
-//			}
-//		});
-//	}else{
-//		player.loadVideoById(event.id);
-//	}
+	$('#main').show();
+	
+	if(player === null){
+		player = new YT.Player('player', {
+			height: '315',
+			width: '500',
+			videoId: event.id,
+			events: {
+				'onReady': onPlayerReady,
+				'onStateChange': onPlayerStateChange,
+				'onError': onPlayerError
+			}
+		});
+	}else{
+		player.loadVideoById(event.id);
+	}
+	videoId = event.id;
 }

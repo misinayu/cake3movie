@@ -16,10 +16,14 @@ echo $this->Form->button($this->Html->icon('search'), [
 		'disabled' => true
 ]);
 echo $this->Form->end();
-
 echo "<div id='main' class='pull-left'>";
-echo "<div id='player'>fjlakfljasdfjlkajsdfl";
+echo "<div id='player'>";
 echo "</div>";
+echo $this->Form->input('playlist_id', ['options' => $playlists ,'label' => ['text' => '']]);
+echo $this->Form->button('プレイリストに追加', [
+		'type' => 'button',
+		'id' => 'addPlaylist',
+		'class' => 'btn btn-danger']);
 echo "</div>";
 echo "<div id='sidebar'></div>";
 echo $this->Html->script('https://apis.google.com/js/client.js?onload=googleApiClientReady');

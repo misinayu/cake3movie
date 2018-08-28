@@ -20,7 +20,7 @@ class PlaylistsTable extends Table{
 				'foreignKey' => 'user_id',
 				'joinType' => 'INNER'
 		]);
-		$this->hasMany('PlaylistMovies', [
+		$this->hasMany('Movies', [
 				'foreignKey' => 'playlist_id'
 		]);
 		

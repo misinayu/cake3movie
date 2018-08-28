@@ -12,3 +12,7 @@ body{
 .main .page-header{
 	margin-top: 0;
 }
+
+.movie_box{
+	cursor: pointer;
+}

@@ -27,10 +27,10 @@ CREATE TABLE playlists(
 );
 
 
-DROP TABLE IF EXISTS playlist_movies;
-CREATE TABLE playlist_movies(
+DROP TABLE IF EXISTS movies;
+CREATE TABLE movies(
 	id int(11) NOT NULL AUTO_INCREMENT,
-	movie_id varchar(255) NOT NULL,
+	video_id varchar(255) NOT NULL,
 	order_num int(11) NOT NULL,
 	playlist_id int(11) NOT NULL,
 	modified datetime DEFAULT NULL,

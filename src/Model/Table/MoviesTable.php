@@ -6,11 +6,11 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
-class PlaylistMoviesTable extends Table{
+class MoviesTable extends Table{
 	public function initialize(array $config){
 		parent::initialize($config);
 		
-		$this->table('playlist_movies');
+		$this->table('movies');
 		$this->displayField('id');
 		$this->primaryKey('id');
 		
@@ -27,8 +27,12 @@ class PlaylistMoviesTable extends Table{
 			->integer('id')
 			->allowEmpty('id', 'create');
 		$validator
-			->requirePresence('movie_id', 'create')
-			->notEmpty('movie_id');
+			->requirePresence('video_id', 'create')
+			->notEmpty('video_id');
+		$validator
+			->integer('order_num')
+			->requirePresence('order_num')
+			->notEmpty('order_num');
 		$validator
 			->integer('playlist_id')
 			->requirePresence('playlist_id', 'create')
