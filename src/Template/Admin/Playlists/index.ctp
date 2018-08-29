@@ -1,3 +1,4 @@
+<?php $this->prepend('script', $this->Html->script('admin_playlists')); ?>
 <h1 class="page-header">マイプレイリスト一覧</h1>
 <table class="table table-striped" cellpadding="0" cellspacing="0">
 <tr>
@@ -18,7 +19,8 @@
 	<td>
 		<?= $this->Form->button('開く', [
 				'type' => 'button',
-				'id' => 'view',
+				'name' => 'viewPlaylist',
+				'value' => $playlist->id,
 				'class' => 'btn btn-info'
 		]) ?>
 		<?= $this->Html->link('編集', 
@@ -28,6 +30,12 @@
 <?php endforeach;?>
 </table>
 
+<div id="movie">
+	<div id="main">
+		<div id="player"></div>
+	</div>
+	<div id="sidebar"></div>
+</div>
 
 <div class="paginator">
 	<ul class="pagination">
@@ -37,3 +45,4 @@
 		]) ?>
 	</ul>
 </div>
+<?php echo $this->Html->script('https://apis.google.com/js/client.js?onload=googleApiClientReady');

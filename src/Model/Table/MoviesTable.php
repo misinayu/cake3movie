@@ -11,7 +11,7 @@ class MoviesTable extends Table{
 		parent::initialize($config);
 		
 		$this->table('movies');
-		$this->displayField('id');
+		$this->displayField('video_id');
 		$this->primaryKey('id');
 		
 		$this->addBehavior('Timestamp');

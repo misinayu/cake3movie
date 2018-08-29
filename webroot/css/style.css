@@ -16,3 +16,13 @@ body{
 .movie_box{
 	cursor: pointer;
 }
+
+.movie_box thum{
+	cursor:pointer;
+}
+
+.movie_box span{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}

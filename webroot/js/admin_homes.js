@@ -18,11 +18,11 @@ var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 function onYouTubePlayerAPIReady(){}
-////プレイヤが準備できたら呼び出させる
+//プレイヤが準備できたら呼び出させる
 function onPlayerReady(event){
 	event.target.playVideo();
 }
-//// ステータスが変更されたら呼び出させる
+// ステータスが変更されたら呼び出させる
 function onPlayerStateChange(event){
 	if(event.data == YT.PlayerState.ENDED){
 		playNext();
@@ -34,7 +34,7 @@ function onPlayerStateChange(event){
 //		$('#exe').addClass('glyphicon-play');
 	}
 }
-//// エラーが起きたら次を再生
+// エラーが起きたら次を再生
 function onPlayerError(event){
 	playNext();
 }
@@ -155,12 +155,12 @@ function adminHomeSearchError(result){
 }
 
 function adminMovieAddRequest(event){
-	data = $('*[name=playlist_id]').val();
-	console.log(data);
+	playlist_id = $('*[name=playlist_id]').val();
+	console.log(playlist_id);
 	$.ajax({
 		url: "/cake3movie/admin/movies/add",
 		type: "POST",
-		data: {playlist_id : data, video_id : videoId},
+		data: {playlist_id : playlist_id, video_id : videoId},
 		dataType: "json",
 		success: adminMovieAddSuccess,
 		error: adminMovieAddError,

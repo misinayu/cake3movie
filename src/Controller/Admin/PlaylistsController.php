@@ -57,4 +57,24 @@ class PlaylistsController extends AppController{
 		
 		$this->set(compact('playlist'));
 	}
+	
+	public function view(){
+		$this->autoRender = FALSE;
+		$result = [];
+		
+		if($this->request->is(['ajax'])){
+			$playlist_id = $this->request->data['playlist_id'];
+			$movies = $this->Playlists->Movies->find('list', [
+					'conditions' => ['playlist_id' => $playlist_id],
+					'order' => ['order_num' => 'ASC', 'modified' => 'ASC']
+			]);
+			
+			$result['status'] = "success";
+			$result['movies'] = $movies;
+			echo json_encode($result);
+			return;
+		}
+		$result['status'] = "error";
+		echo json_encode($result);
+	}
 }
