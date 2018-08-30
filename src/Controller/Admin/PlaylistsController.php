@@ -9,7 +9,7 @@ class PlaylistsController extends AppController{
 		$user_id = $this->MyAuth->user("id");
 		$this->paginate = [
 				'contain' => ['Users'],
-				'conditions' => ['user_id' => $user_id]
+// 				'conditions' => ['user_id' => $user_id]
 		];
 		$playlists = $this->paginate($this->Playlists);
 		$this->set(compact('playlists'));
@@ -61,16 +61,19 @@ class PlaylistsController extends AppController{
 	public function view(){
 		$this->autoRender = FALSE;
 		$result = [];
+		$movie_list = [];
 		
 		if($this->request->is(['ajax'])){
 			$playlist_id = $this->request->data['playlist_id'];
 			$movies = $this->Playlists->Movies->find('list', [
 					'conditions' => ['playlist_id' => $playlist_id],
-					'order' => ['order_num' => 'ASC', 'modified' => 'ASC']
+					'order' => ['order_num' => 'ASC']
 			]);
-			
+			foreach($movies as $m){
+				$movie_list[] = $m;
+			}
 			$result['status'] = "success";
-			$result['movies'] = $movies;
+			$result['movies'] = $movie_list;
 			echo json_encode($result);
 			return;
 		}

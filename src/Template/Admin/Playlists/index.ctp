@@ -31,10 +31,10 @@
 </table>
 
 <div id="movie">
-	<div id="main">
+	<div id="main" class="pull-left">
 		<div id="player"></div>
 	</div>
-	<div id="sidebar"></div>
+	<div id="sidebar" class="pull-left"></div>
 </div>
 
 <div class="paginator">

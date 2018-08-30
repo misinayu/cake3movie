@@ -4,6 +4,10 @@ body{
 	padding-top: 50px;
 }
 
+#sidebar table, #sidebar tr, #sidebar td{
+	border: 1px solid #ffccde;
+}
+
 .main{
 	padding: 20px 40px;
 	background-color: #fff;

@@ -27,11 +27,9 @@ function onPlayerStateChange(event){
 	if(event.data == YT.PlayerState.ENDED){
 		playNext();
 	} else if(event.data == YT.PlayerState.PLAYING){
-//		$('#exe').removeClass('glyphicon-play');
-//		$('#exe').addClass('glyphicon-pause');
+		
 	} else if(event.data == YT.PlayerState.PAUSED){
-//		$('#exe').removeClass('glyphicon-play');
-//		$('#exe').addClass('glyphicon-play');
+		
 	}
 }
 // エラーが起きたら次を再生
@@ -45,6 +43,8 @@ function playNext(){
 		current = 0;
 	}
 	player.loadVideoById(playlist[current]);
+	$('.movie_box').css('background-color', 'white');
+	$('.movie_box').eq(current).css('background-color', 'red');
 }
 function playPrev(){
 	current--;
@@ -52,6 +52,8 @@ function playPrev(){
 		current = playlist.length - 1;
 	}
 	player.loadVideoById(playlist[current]);
+	$('.movie_box').css('background-color', 'white');
+	$('.movie_box').eq(current).css('background-color', 'red');
 }
 function exe(){
 	if(player.getPlayerState() == YT.PlayerState.PLAYING){
@@ -85,7 +87,7 @@ var search = function(keyword){
 					data.items[i].id.kind == "youtube#video"){
 				playlist.push(data.items[i].id.videoId);
 				$('#sidebar table').append(
-						'<tr class="movie_box" onclick="playMovie(this)" id="' + data.items[i].id.videoId + '">' +
+						'<tr class="movie_box" onclick="playMovie(this);" id="' + data.items[i].id.videoId + '">' +
 						'<td class="thum">' +
 						'<img src="' + data.items[i].snippet.thumbnails.default.url + '"/>' +
 						'</td>' +
@@ -96,21 +98,6 @@ var search = function(keyword){
 				);
 			}
 		}
-		
-//		if(playlist.length > 0 && player == null){
-//			player = new YT.Player('player', {
-//				height: '315',
-//				width: '500',
-//				videoId: playlist[0],
-//				events: {
-//					'onReady': onPlayerReady,
-//					'onStateChange': onPlayerStateChange,
-//					'onError': onPlayerError
-//				}
-//			});
-//		}else{
-//			current = -1;
-//		}
 	});
 };
 
@@ -155,12 +142,13 @@ function adminHomeSearchError(result){
 }
 
 function adminMovieAddRequest(event){
+	adminMovieAddFormInit();
 	playlist_id = $('*[name=playlist_id]').val();
 	console.log(playlist_id);
 	$.ajax({
 		url: "/cake3movie/admin/movies/add",
 		type: "POST",
-		data: {playlist_id : playlist_id, video_id : videoId},
+		data: {playlist_id : playlist_id, video_id : playlist[current]},
 		dataType: "json",
 		success: adminMovieAddSuccess,
 		error: adminMovieAddError,
@@ -168,20 +156,46 @@ function adminMovieAddRequest(event){
 }
 function adminMovieAddSuccess(result){
 	console.log(result);
+	if(result['status'] == 'success'){
+		showSuccessMessage("プレイリストに動画を登録しました");
+	}else{
+		showErrorMessage(result['errors']);
+	}
+	
 }
 function adminMovieAddError(result){
-	console.log(result);
+	showErrorMessage("エラーが発生しました");
+}
+
+function adminMovieAddFormInit(){
+	$('#message').remove();
+	$('.help-block').remove();
+	$('.form-group').removeClass('has-error');
+}
+
+function showSuccessMessage(message){
+	var tag = '<div id="message" class="alert alert-success">';
+	tag += message;
+	tag += '</div>';
+	$('.main').prepend(tag);
+}
+function showErrorMessage(message){
+	var tag = '<div id="message" class="alert alert-danger">';
+	tag += message;
+	tag += '</div>';
+	$('.main').prepend(tag);
 }
 
 // 検索リストの動画を押した時
 function playMovie(event){
 	$('#main').show();
+	current = $('.movie_box').index(event);
 	
 	if(player === null){
 		player = new YT.Player('player', {
 			height: '315',
 			width: '500',
-			videoId: event.id,
+			videoId: playlist[current],
 			events: {
 				'onReady': onPlayerReady,
 				'onStateChange': onPlayerStateChange,
@@ -191,5 +205,7 @@ function playMovie(event){
 	}else{
 		player.loadVideoById(event.id);
 	}
-	videoId = event.id;
+	$('.movie_box').css('background-color', 'white');
+	$(event).css('background-color', 'red');
+	
 }
