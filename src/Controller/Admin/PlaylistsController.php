@@ -9,7 +9,7 @@ class PlaylistsController extends AppController{
 		$user_id = $this->MyAuth->user("id");
 		$this->paginate = [
 				'contain' => ['Users'],
-// 				'conditions' => ['user_id' => $user_id]
+				'conditions' => ['user_id' => $user_id]
 		];
 		$playlists = $this->paginate($this->Playlists);
 		$this->set(compact('playlists'));
@@ -19,7 +19,6 @@ class PlaylistsController extends AppController{
 		$playlist = $this->Playlists->newEntity();
 		$user_id = $this->MyAuth->user("id");
 		if($this->request->is('post')){
-			
 // 			$playlist->name = $this->request->data['name'];
 			$playlist = $this->Playlists->patchEntity($playlist, $this->request->data);
 			$playlist->user_id = $user_id;

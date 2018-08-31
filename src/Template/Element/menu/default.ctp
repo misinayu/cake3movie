@@ -6,7 +6,7 @@
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li>
-					<?= $this->Html->link("プレイリスト一覧", "/playlists/index"); ?>
+					<?= $this->Html->link("公開プレイリスト一覧", "/openplaylists/index"); ?>
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">

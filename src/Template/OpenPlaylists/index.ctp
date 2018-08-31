@@ -1,5 +1,5 @@
-<?php $this->prepend('script', $this->Html->script('admin_playlists')); ?>
-<h1 class="page-header">マイプレイリスト一覧</h1>
+<?php $this->prepend('script', $this->Html->script('openplaylists')); ?>
+<h1 class="page-header">プレイリスト一覧</h1>
 <table class="table table-striped" cellpadding="0" cellspacing="0">
 <tr>
 	<th scope="col"><?= $this->Paginator->sort('id') ?></th>
@@ -23,9 +23,6 @@
 				'value' => $playlist->id,
 				'class' => 'btn btn-info'
 		]) ?>
-		<?= $this->Html->link('編集', 
-				['action' => 'edit', $playlist->id], 
-				['class' => 'btn btn-default']) ?>
 </tr>
 <?php endforeach;?>
 </table>

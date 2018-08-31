@@ -29,7 +29,8 @@ echo $this->Form->button($this->Html->icon('forward'), [
 ]);
 echo $this->Form->end();
 echo "<div id='main' class='pull-left'>";
-echo "<div id='player'>";
-echo "</div></div>";
+echo "<div id='player'></div>";
+// echo "<div id='chats'></div>";
+echo "</div>";
 echo "<div id='sidebar'></div>";
 echo $this->Html->script('https://apis.google.com/js/client.js?onload=googleApiClientReady');
