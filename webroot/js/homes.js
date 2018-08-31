@@ -66,6 +66,7 @@ function exe(){
 }
 
 
+
 var search = function(keyword){
 	playlist = [];
 	gapi.client.setApiKey(apiKey);
@@ -109,7 +110,6 @@ $(function(){
 	$('#main').hide();
 	$('#prev, #exe, #next').hide();
 	$('#adminHomesSearchButton').on('click', adminHomesSearchRequest);
-	$('#addPlaylist').on('click', adminMovieAddRequest);
 	
 	$('#prev').on('click', function(){
 		playPrev();
@@ -125,7 +125,7 @@ $(function(){
 function adminHomesSearchRequest(event){
 	var data = $('#homeSearch').serialize();
 	$.ajax({
-		url: "/cake3movie/admin/homes/indexajax",
+		url: "/cake3movie/homes/indexajax",
 		type: "POST",
 		data: data,
 		dataType: "json",
@@ -141,51 +141,6 @@ function adminHomeSearchSuccess(result){
 
 function adminHomeSearchError(result){
 	console.log(result);
-}
-
-function adminMovieAddRequest(event){
-	adminMovieAddFormInit();
-	playlist_id = $('*[name=playlist_id]').val();
-	console.log(playlist_id);
-	$.ajax({
-		url: "/cake3movie/admin/movies/add",
-		type: "POST",
-		data: {playlist_id : playlist_id, video_id : playlist[current]},
-		dataType: "json",
-		success: adminMovieAddSuccess,
-		error: adminMovieAddError,
-	});
-}
-function adminMovieAddSuccess(result){
-	console.log(result);
-	if(result['status'] == 'success'){
-		showSuccessMessage("プレイリストに動画を登録しました");
-	}else{
-		showErrorMessage(result['errors']);
-	}
-	
-}
-function adminMovieAddError(result){
-	showErrorMessage("エラーが発生しました");
-}
-
-function adminMovieAddFormInit(){
-	$('#message').remove();
-	$('.help-block').remove();
-	$('.form-group').removeClass('has-error');
-}
-
-function showSuccessMessage(message){
-	var tag = '<div id="message" class="alert alert-success">';
-	tag += message;
-	tag += '</div>';
-	$('.main').prepend(tag);
-}
-function showErrorMessage(message){
-	var tag = '<div id="message" class="alert alert-danger">';
-	tag += message;
-	tag += '</div>';
-	$('.main').prepend(tag);
 }
 
 // 検索リストの動画を押した時

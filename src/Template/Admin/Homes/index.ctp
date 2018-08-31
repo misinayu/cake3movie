@@ -15,6 +15,18 @@ echo $this->Form->button($this->Html->icon('search'), [
 		'id' => 'adminHomesSearchButton',
 		'disabled' => true
 ]);
+echo $this->Form->button($this->Html->icon('backward'), [
+		'type' => 'button',
+		'id' => 'prev'
+]);
+echo $this->Form->button($this->Html->icon('pause'), [
+		'type' => 'button',
+		'id' => 'exe'
+]);
+echo $this->Form->button($this->Html->icon('forward'), [
+		'type' => 'button',
+		'id' => 'next'
+]);
 echo $this->Form->end();
 echo "<div id='main' class='pull-left'>";
 echo "<div id='player'>";

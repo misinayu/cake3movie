@@ -1,15 +1,12 @@
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
 	<div class="container-fluid">
 		<div class="navbar-header">
-		<?= $this->Html->link("動画再生アプリ", "/users/login", ["class" => "navbar-brand"]); ?>
+		<?= $this->Html->link("動画再生アプリ", "/homes/index", ["class" => "navbar-brand"]); ?>
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li>
-					<?= $this->Html->link("公開プレイリスト", "#", ["data-toggle" => "dropdown"]); ?>
-					<ul class="dropdown-menu">
-						<li><?= $this->Html->link("公開プレイリスト一覧", "/admin/open_playlists/index"); ?></li>
-					</ul>
+					<?= $this->Html->link("プレイリスト一覧", "/playlists/index"); ?>
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">

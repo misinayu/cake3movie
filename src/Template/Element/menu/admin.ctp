@@ -10,7 +10,6 @@
 					<ul class="dropdown-menu">
 						<li><?= $this->Html->link("プレイリスト一覧", "/admin/playlists/index"); ?></li>
 						<li><?= $this->Html->link("プレイリスト作成", "/admin/playlists/add"); ?></li>
-						<li><?= $this->Html->link("公開プレイリスト一覧", "/admin/playlists/open"); ?></li>
 					</ul>
 				</li>
 			</ul>
