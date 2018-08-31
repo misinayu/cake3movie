@@ -41,11 +41,19 @@ class MoviesController extends AppController{
 	public function delete(){
 		$this->autoRender = FALSE;
 		$result = [];
-		$movie = $this->Movies->newEntity();
+		$user_id = $this->MyAuth->user('id');
 	
 		if($this->request->is(['ajax'])){
 			$playlist_id = $this->request->data['playlist_id'];
 			$video_id = $this->request->data['video_id'];
+			$playlist = $this->Movies->Playlists->get($playlist_id);
+			if($playlist->user_id !== $user_id){
+				$result['status'] = "error";
+				$result['errors'] = "あなたのプレイリストではありません";
+				echo json_encode($result);
+				return;
+			}
+			
 			$movies = $this->paginate($this->Movies, [
 					'order' => ['order_num' => 'asc'],
 					'conditions' => ['playlist_id' => $playlist_id]
@@ -90,10 +98,20 @@ class MoviesController extends AppController{
 	public function up(){
 		$this->autoRender = FALSE;
 		$result = [];
+		$user_id = $this->MyAuth->user('id');
 		
 		if($this->request->is(['ajax'])){
 			$playlist_id = $this->request->data['playlist_id'];
 			$video_id = $this->request->data['video_id'];
+			
+			$playlist = $this->Movies->Playlists->get($playlist_id);
+			if($playlist->user_id !== $user_id){
+				$result['status'] = "error";
+				$result['errors'] = "あなたのプレイリストではありません";
+				echo json_encode($result);
+				return;
+			}
+			
 			$movies = $this->paginate($this->Movies, [
 					'conditions' => ['playlist_id' => $playlist_id],
 					'order' => ['order_num' => 'asc']
@@ -157,10 +175,20 @@ class MoviesController extends AppController{
 	public function down(){
 		$this->autoRender = FALSE;
 		$result = [];
+		$user_id = $this->MyAuth->user('id');
 		
 		if($this->request->is(['ajax'])){
 			$playlist_id = $this->request->data['playlist_id'];
 			$video_id = $this->request->data['video_id'];
+			
+			$playlist = $this->Movies->Playlists->get($playlist_id);
+			if($playlist->user_id !== $user_id){
+				$result['status'] = "error";
+				$result['errors'] = "あなたのプレイリストではありません";
+				echo json_encode($result);
+				return;
+			}
+			
 			$movies = $this->paginate($this->Movies, [
 					'conditions' => ['playlist_id' => $playlist_id],
 					'order' => ['order_num' => 'asc']

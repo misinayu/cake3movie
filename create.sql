@@ -21,7 +21,6 @@ CREATE TABLE playlists(
 	id int(11) NOT NULL AUTO_INCREMENT,
 	name varchar(255) NOT NULL,
 	user_id int(11) NOT NULL,
-	is_open int(11) NOT NULL DEFAULT 0,
 	modified datetime DEFAULT NULL,
 	created datetime DEFAULT NULL,
 	PRIMARY KEY (id)

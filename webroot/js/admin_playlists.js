@@ -95,36 +95,6 @@ function showPlaylist(movies){
 	idlist = playlist.join(',');
 	gapi.client.setApiKey(apiKey);
 	gapi.client.load('youtube', 'v3', function(){});
-	/*
-	$.each(playlist, function(value){
-		var request = gapi.client.request({
-			'path': '/youtube/v3/videos',
-			'params': {
-				'part': 'snippet',
-				'id': this
-			}
-		});
-		request.execute(function(data){
-			console.log(data);
-			if(data.kind == "youtube#videoListResponse"
-				&& data.items[0].kind == "youtube#video"){
-				$('#sidebar table').append(
-						'<tr class="movie_box" id="' + data.items[0].id + '">' +
-						'<td class="thum" onclick="playMovie(this, \''+ data.items[0].id +'\');">' +
-						'<img src="' + data.items[0].snippet.thumbnails.default.url + '"/>' +
-						'</td>' +
-						'<td class="details" onclick="playMovie(this, \''+ data.items[0].id +'\');">' + data.items[0].snippet.title + '<br />' +
-						'</td>' +
-						'<td>'+
-						'<div class="btn btn-default glyphicon glyphicon-arrow-up up" onclick="upMovie(this);"></div>'+
-						'<div class="btn btn-default glyphicon glyphicon-arrow-down down" onclick="downMovie(this);"></div>'+
-						'<div class="btn btn-warning" onclick="removeMovie(\'' + data.items[0].id + '\');" >削除</div></td>' +
-						'<\tr>'
-				);
-			}
-		});
-	});
-	*/
 	var request = gapi.client.request({
 		'path': '/youtube/v3/videos',
 		'params': {

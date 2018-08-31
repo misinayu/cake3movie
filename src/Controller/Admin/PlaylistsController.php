@@ -35,11 +35,13 @@ class PlaylistsController extends AppController{
 	
 	public function edit($playlist_id = null){
 		$user_id = $this->MyAuth->user("id");
-		$playlist = $this->Playlists->get($playlist_id, [
-				'conditions' => [
-						'user_id' => $user_id
-				]
-		]);
+		$playlist = $this->Playlists->get($playlist_id);
+		
+		// ログインユーザのプレイリストじゃない場合はプレイリスト一覧に戻る
+		if($playlist->user_id !== $user_id){
+			$this->Flash->error(__('あなたのプレイリストではありません'));
+			return $this->redirect(['action' => 'index']);
+		}
 		
 		if(isset($playlist) && !empty($playlist)){
 			if($this->request->is(['patch', 'post', 'put'])){

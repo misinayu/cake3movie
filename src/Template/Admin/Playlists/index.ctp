@@ -1,5 +1,5 @@
 <?php $this->prepend('script', $this->Html->script('admin_playlists')); ?>
-<h1 class="page-header">マイプレイリスト一覧</h1>
+<h1 class="page-header">プレイリスト一覧</h1>
 <table class="table table-striped" cellpadding="0" cellspacing="0">
 <tr>
 	<th scope="col"><?= $this->Paginator->sort('id') ?></th>
